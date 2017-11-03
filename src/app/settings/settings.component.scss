@@ -1,0 +1,10 @@
+$icon-blue:rgb(100, 106, 187);
+
+.settings-component{
+    .icon{
+        font-size: 80px;
+        color: $icon-blue;
+        padding: 5px;
+        background-color: rgba(1,1,1,0.1);
+    }
+}//end:settings-component

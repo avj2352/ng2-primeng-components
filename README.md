@@ -32,6 +32,11 @@ export class AppBasicHighlight implements OnInit{
 
 # Better Angular Directive using HostBinding, HostListener and Renderer2
 
+
+- With `HostBinding` you can bind to a particular property of the DOM Element you are sitting on.
+- With `HostListener` you can listen to the DOM events you are on.
+
+
 ```js
 import { Directive, OnInit, ElementRef, Renderer2, HostListener, HostBinding} from '@angular/core';
 
@@ -55,7 +60,8 @@ export class BetterHighlightDirective implements OnInit {
 
   
   @HostListener ('mouseenter') onMouseEnter(){    
-    this.renderer.setStyle(this.elementRef.nativeElement,'background-color','blue');
+    // this.renderer.setStyle(this.elementRef.nativeElement,'background-color','blue');
+    this.backgroundColor = 'blue';
   }//end:onMouseEnter
 
   @HostListener ('mouseleave') onMouseExit(){    
@@ -64,4 +70,61 @@ export class BetterHighlightDirective implements OnInit {
 
 }
 
+```
+
+
+# Binding to Custom Properties and Native DOM Element Properties
+
+To Bind to Native DOM Element attributes, use the following Decorators
+
+- `@HostListener`
+- `@HostBinding`
+
+To Bind to Custom Properties and Event Methods, use the following Decorators
+
+- `@Input`
+- `@Output`
+
+
+# Reason for * in ngIf and ngFor
+
+The reason there is a `*` for `ngIf` and `ngFor`:
+
+```js
+<div *ngIf="isBoolean" ></div>
+```
+
+the above code can be re-written as follows:
+
+```js
+<ng-template [ngif]="isBoolean">
+  <div></div>
+</ng-template>
+```
+
+# Structural Directives
+
+>`NOTE:` Structural Directives, in Angular 4+ are represented as `*myCustomStructural` Directive.
+
+```js
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[appUnless]'
+})
+export class UnlessDirective {
+
+  @Input() set appUnless(condition:boolean){
+    if(!condition){
+        // this will have the reference to the view template of the directive
+        this.vcRef.createEmbeddedView(this.templateRef);
+    }else{
+      this.vcRef.clear();
+    }//end:endif
+  }//end:unless
+
+  constructor(private templateRef:TemplateRef<any>, private  vcRef:ViewContainerRef ) {
+
+   }//end:constructor
+}//end:class-unlessDirective
 ```

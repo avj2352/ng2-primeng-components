@@ -11,13 +11,15 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 //Directives
 import {AppBasicHighlight} from './directives/appBasicHighlight.directive';
 import { BetterHighlightDirective } from './directives/better-highlight.directive';
+import { UnlessDirective } from './directives/unless.directive';
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
     SideBarComponent,
     AppBasicHighlight,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule,
